@@ -1,13 +1,28 @@
 "use client";
 
-import { SyntheticEvent, useState } from "react";
+import { SyntheticEvent, useEffect, useState } from "react";
+import { BASE_URL } from "./constants";
+
+async function searchMovies(query: string) {
+  try {
+    let resposne = await fetch(`${BASE_URL}/search/movie?api_key=${process.env.NEXT_PUBLIC_API_KEY}&query=${encodeURIComponent(query)}}`);
+    return await resposne.json();
+  } catch (error) {
+    console.log("🚀 ~ file: page.tsx:9 ~ searchMovies ~ error:", error);
+    return [];
+  }
+}
 
 export default function Home() {
   const [query, setQuery] = useState("");
+  const [movies, setMovies] = useState([]);
 
   const handleSearch = async (e: SyntheticEvent) => {
     e.preventDefault();
-    alert(query);
+    if (!query) return;
+    const res = await searchMovies(query);
+    console.log("🚀 ~ file: page.tsx:23 ~ handleSearch ~ res:", res);
+    setMovies(res.results);
   };
 
   return (
@@ -19,7 +34,7 @@ export default function Home() {
             type="text"
             value={query}
             onChange={e => {
-              console.log(e.target.value);
+              //   console.log(e.target.value);
               setQuery(e.target.value);
             }}
             placeholder="Search for a movie..."
