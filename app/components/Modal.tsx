@@ -25,7 +25,7 @@ export default function Modal({ movie, handleClose }: any) {
           </p>
         </div>
         <div className="grid grid-rows-1 place-content-center">
-          <button onClick={handleClose} className="mt-4 bg-blue-500 px-4 py-2 rounded">
+          <button onClick={handleClose} className="mt-4 bg-blue-500 px-4 py-2 rounded hover:bg-blue-500/80 hover:duration-300">
             Close
           </button>
         </div>

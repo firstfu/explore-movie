@@ -4,6 +4,7 @@ import { SyntheticEvent, useEffect, useState } from "react";
 import { BASE_URL } from "./constants";
 import MovieGrid from "./components/MovieGrid";
 import Modal from "./components/Modal";
+import Sidebar from "./components/Sidebar";
 
 export default function Home() {
   const [query, setQuery] = useState("");
@@ -34,13 +35,12 @@ export default function Home() {
   }
 
   function handleCloseModal() {
-    // alert("關閉");
     setSelectedMovie(null);
   }
 
   return (
     <div className="bg-gray-900 text-white min-h-screen">
-      <main className="flex flex-col items-center justify-center  min-h-screen py-2 ">
+      <main className="flex flex-col items-center justify-center  min-h-screen py-2">
         <h1 className="text-6xl font-bold m-4">Movie Explorer</h1>
         <form onSubmit={handleSearch} className="m-8">
           <input
