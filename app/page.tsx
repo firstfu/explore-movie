@@ -2,6 +2,7 @@
 
 import { SyntheticEvent, useEffect, useState } from "react";
 import { BASE_URL } from "./constants";
+import MovieGrid from "./components/MovieGrid";
 
 async function searchMovies(query: string) {
   try {
@@ -25,11 +26,15 @@ export default function Home() {
     setMovies(res.results);
   };
 
+  const handleClick = (val: any) => {
+    alert(val ?? "NO");
+  };
+
   return (
     <div className="bg-gray-900 text-white min-h-screen">
-      <main className="flex flex-col items-center justify-center  min-h-screen">
-        <h1 className="text-6xl font-bold">Movie Explorer</h1>
-        <form onSubmit={handleSearch} className="mt-8">
+      <main className="flex flex-col items-center justify-center  min-h-screen py-2">
+        <h1 className="text-6xl font-bold m-4">Movie Explorer</h1>
+        <form onSubmit={handleSearch} className="m-8">
           <input
             type="text"
             value={query}
@@ -45,6 +50,7 @@ export default function Home() {
           </button>
         </form>
         {/* MovieGrid */}
+        <MovieGrid movies={movies} handleClick={() => null} />
       </main>
 
       {/* Modal */}
